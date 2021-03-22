@@ -1,0 +1,20 @@
+<div style="width: 100%; text-align: center;padding-top: 20px">
+<h1 style="font-family: Roboto; color: dimgrey; font-weight: bolder">LET'S BOWL</h1>
+</div>
+<div style="display: flex;justify-content: space-around; padding: 30px">
+   <div class="login-panel">
+     <form [formGroup]="form">
+       <mat-form-field class="example-full-width">
+         <mat-label>Username</mat-label>
+         <input matInput formControlName="username">
+       </mat-form-field>
+       <mat-form-field class="example-full-width" style="display: block">
+         <mat-label>Password</mat-label>
+         <input type="password" matInput formControlName="password">
+       </mat-form-field>
+       <button mat-button color="primary" style="width: 100%">LOG IN</button>
+       <button mat-button color="warn" style="width: 100%">REGISTER</button>
+     </form>
+   </div>
+   <img style="width: 600px;" src="assets/image/bowling.png">
+</div>
