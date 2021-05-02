@@ -1,0 +1,11 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.padding20{
+  padding: 20px;
+}
+
+.example-full-width{
+   width: 100%;
+}

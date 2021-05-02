@@ -1,0 +1,50 @@
+<p style="margin-bottom: 30px;">
+  <mat-toolbar>
+    <span style="font-size: 25px; padding-left: 20px">{{user?.name + ' ' + user?.surname}}</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Example icon-button with menu icon">
+      <mat-icon style="font-size: 30px;">menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="overview()">
+        <mat-icon>dialpad</mat-icon>
+        <span>Overview</span>
+      </button>
+      <button mat-menu-item (click)="profileDetails()">
+        <mat-icon>person</mat-icon>
+        <span>Profile details</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>people</mat-icon>
+        <span>Friends</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Log out</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</p>
+
+<form [formGroup]="form">
+<mat-form-field  style="width: 400px;padding-left: 40px;padding-top: 40px;padding-right: 25px;">
+  <mat-label>Users</mat-label>
+  <mat-select formControlName="friend">
+    <mat-option *ngFor="let userObj of userList" [value]="userObj.id" [disabled]="userObj.name == this.user.name">
+      {{userObj.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="addFriend()">Add friend</button>
+</form>
+
+<mat-list style="margin-left: 30px;width: 500px;" *ngIf="backendService.friendList.length > 0">
+  <mat-list-item *ngFor="let friend of backendService.friendList;last as last">
+    <mat-icon style="cursor: pointer" (click)="openFriendProfile()">face</mat-icon>
+    <span class="padding-left">{{friend.name}}</span>
+    <span class="padding-left" style="color: darkred"> {{friend.username}}</span>
+    <span class="padding-left">{{friend.surname}}</span>
+    <mat-icon style="padding-left: 20px; font-size: 20px; cursor: pointer" (click)="deleteFriend(friend.id)">delete</mat-icon>
+  <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+  </mat-list-item>
+</mat-list>

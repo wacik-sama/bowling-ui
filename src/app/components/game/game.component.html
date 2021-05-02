@@ -1,0 +1,121 @@
+<div class="padding20">
+   <div style="width: 100%;text-align: right">
+     <button mat-raised-button color="warn" style="width: 200px;font-size: 16px;"
+             *ngIf="!game" (click)="game = !game">NEW GAME</button>
+     <button mat-raised-button color="warn" style="width: 200px;font-size: 16px;"
+             *ngIf="game" (click)="game = !game">QUIT GAME</button>
+   </div>
+
+    <div class="game-container" *ngIf="game">
+      <form [formGroup]="form">
+        <mat-form-field  style="width: 400px;padding-left: 40px;padding-top: 40px;padding-right: 25px;">
+          <mat-label>Select opponent</mat-label>
+          <mat-select formControlName="opponent">
+            <mat-option *ngFor="let userObj of userList" [value]="userObj" [disabled]="userObj.name == this.user.name">
+              {{userObj.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    <table class="game-table" *ngIf="opponent.value !== null">
+      <tr>
+        <th>Round</th>
+        <th>{{user.username}}</th>
+        <th>{{opponent.value.username}}</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[0]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[0]"></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[1]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[1]"></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[2]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[2]"></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[3]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[3]"></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[4]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[4]"></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[5]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[5]"></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[6]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[6]"></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[7]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[7]"></td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[8]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[8]"></td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="userScore[9]"></td>
+        <td><input matInput type="number" class="score-input" [(ngModel)]="opponentScore[9]"></td>
+      </tr>
+    </table>
+      <div style="width: 100%;">
+        <button mat-raised-button color="primary" style="width: 400px;font-size: 16px;" *ngIf="opponent.value !== null" (click)="saveGame()">SAVE GAME</button>
+      </div>
+    </div>
+
+  <div class="margin-top">
+    <h1 style="font-family: Roboto; color: dimgrey; text-align: center">GAMES LIST</h1>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 example-full-width">
+
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index;">{{i+1}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="username1">
+      <th mat-header-cell *matHeaderCellDef> Player </th>
+      <td mat-cell *matCellDef="let element"> {{element.player1.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="score1">
+      <th mat-header-cell *matHeaderCellDef> Score </th>
+      <td mat-cell *matCellDef="let element"> {{element.score1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username2">
+      <th mat-header-cell *matHeaderCellDef> Player </th>
+      <td mat-cell *matCellDef="let element"> {{element.player2.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="score2">
+      <th mat-header-cell *matHeaderCellDef> Score </th>
+      <td mat-cell *matCellDef="let element"> {{element.score2}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>
